@@ -9,11 +9,13 @@ function Container() {
     <div className="h-[100vh] relative sm:h-full ">
       <Header />
 
-      <section className=" w-full flex">
-        <div className="hidden sm:flex bottom-0 bg-black">
+      <section className=" w-full flex mt-[65px] relative">
+        <div className="hidden sm:flex fixed top-[65px] left-0">
           <Sidebar />
         </div>
-        <Outlet />
+        <div className="ml-0 sm:ml-[300px]">
+          <Outlet />
+        </div>
       </section>
       <section className="  fixed sm:hidden flex bottom-[10px] w-full">
         <Mobilenav />
