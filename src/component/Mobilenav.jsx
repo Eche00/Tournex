@@ -11,16 +11,6 @@ function Mobilenav() {
     <div className=" w-[90%] mx-auto shadow-black shadow-2xl rounded-[20px]">
       <nav className=" py-[10px] px-[20px] flex items-center justify-between w-full ibm-plex-serif-regular  text-[12px]">
         <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold "
-          }>
-          {" "}
-          <HouseIcon /> <span>Home</span>
-        </NavLink>
-        <NavLink
           to="/news"
           className={({ isActive }) =>
             isActive
@@ -30,6 +20,7 @@ function Mobilenav() {
           {" "}
           <NewspaperIcon /> <span>News</span>
         </NavLink>
+
         <NavLink
           to="/matches"
           className={({ isActive }) =>
@@ -40,6 +31,19 @@ function Mobilenav() {
           {" "}
           <EmojiEventsIcon /> <span>Matches</span>
         </NavLink>
+        <span className=" w-[0.6px] h-[15px] bg-blue-600 "></span>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold scale-120"
+              : "flex flex-col items-center justify-center text-gray-400    font-bold scale-120"
+          }>
+          {" "}
+          <HouseIcon /> <span>Home</span>
+        </NavLink>
+        <span className=" w-[0.6px] h-[15px] bg-blue-600 "></span>
+
         <NavLink
           to="/search"
           className={({ isActive }) =>
@@ -50,6 +54,7 @@ function Mobilenav() {
           {" "}
           <FindReplaceIcon /> <span>Search</span>
         </NavLink>
+
         <NavLink
           to="/profile"
           className={({ isActive }) =>
