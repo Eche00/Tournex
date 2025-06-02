@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import HouseIcon from "@mui/icons-material/House";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
@@ -7,72 +7,67 @@ import FindReplaceIcon from "@mui/icons-material/FindReplace";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 function Mobilenav() {
+  const location = useLocation();
   return (
     <div className=" w-[90%] mx-auto shadow-black shadow-2xl rounded-[20px]">
-      <nav className=" py-[10px] px-[20px] flex items-center justify-between w-full ibm-plex-serif-regular  text-[12px]">
+      <nav className=" h-[55px] py-[10px] px-[20px] flex items-center justify-between w-full   text-[12px] ">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center justify-center gap-[5px] bg-blue-600  font-extrabold py-[6px] px-[12px] rounded-[10px] text-white transition-all duration-300"
+              : "flex items-center justify-center text-gray-400 font-bold transition-all duration-300"
+          }>
+          {" "}
+          <HouseIcon /> {location.pathname === "/" && <span>Home</span>}
+        </NavLink>
         <NavLink
           to="/news"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold "
+              ? "flex items-center justify-center gap-[5px] bg-blue-600  font-extrabold py-[6px] px-[12px] rounded-[10px] text-white transition-all duration-300"
+              : "flex items-center justify-center text-gray-400 font-bold transition-all duration-300"
           }>
           {" "}
-          <NewspaperIcon /> <span>News</span>
+          <NewspaperIcon /> {location.pathname === "/news" && <span>News</span>}
         </NavLink>
 
         <NavLink
           to="/matches"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold "
+              ? "flex items-center justify-center gap-[5px] bg-blue-600  font-extrabold py-[6px] px-[12px] rounded-[10px] text-white transition-all duration-300"
+              : "flex items-center justify-center text-gray-400 font-bold transition-all duration-300"
           }>
           {" "}
-          <EmojiEventsIcon /> <span>Matches</span>
+          <EmojiEventsIcon />{" "}
+          {location.pathname === "/matches" && <span>Matches</span>}
         </NavLink>
-        <span className=" w-[0.6px] h-[15px] bg-blue-600 "></span>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold scale-120"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold scale-120"
-          }>
-          {" "}
-          <HouseIcon /> <span>Home</span>
-        </NavLink>
-        <span className=" w-[0.6px] h-[15px] bg-blue-600 "></span>
 
         <NavLink
           to="/search"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold "
+              ? "flex items-center justify-center gap-[5px] bg-blue-600  font-extrabold py-[6px] px-[12px] rounded-[10px] text-white transition-all duration-300"
+              : "flex items-center justify-center text-gray-400 font-bold transition-all duration-300"
           }>
           {" "}
-          <FindReplaceIcon /> <span>Search</span>
+          <FindReplaceIcon />{" "}
+          {location.pathname === "/search" && <span>Search</span>}
         </NavLink>
 
         <NavLink
           to="/profile"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center justify-center text-blue-600  font-extrabold"
-              : "flex flex-col items-center justify-center text-gray-400    font-bold "
+              ? "flex items-center justify-center gap-[5px] bg-blue-600  font-extrabold py-[6px] px-[12px] rounded-[10px] text-white transition-all duration-300"
+              : "flex items-center justify-center text-gray-400 font-bold transition-all duration-300"
           }>
           {" "}
-          <ManageAccountsIcon /> <span>Account</span>
+          <ManageAccountsIcon />{" "}
+          {location.pathname === "/profile" && <span>Profile</span>}
         </NavLink>
       </nav>
-      <style jsx>{`
-        .ibm-plex-serif-regular {
-          font-family: "IBM Plex Serif", serif;
-          font-weight: 400;
-          font-style: normal;
-        }
-      `}</style>
     </div>
   );
 }
