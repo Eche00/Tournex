@@ -8,6 +8,7 @@ import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Signup from "./authentication/Signup";
 import Signin from "./authentication/Signin";
+import ForgotPassword from "./authentication/ForgotPassword";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
       </Routes>
     </div>
   );
