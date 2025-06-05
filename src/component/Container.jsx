@@ -13,7 +13,7 @@ function Container() {
         <div className="hidden sm:flex fixed top-[65px] left-0">
           <Sidebar />
         </div>
-        <div className="ml-0 sm:ml-[300px]">
+        <div className="ml-0 sm:ml-[300px] flex-1 p-5">
           <Outlet />
         </div>
       </section>
