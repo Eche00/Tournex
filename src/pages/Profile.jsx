@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 
 function Profile() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [user2, setUser2] = useState(false);
   const [setting, setSetting] = useState(false);
   return (
