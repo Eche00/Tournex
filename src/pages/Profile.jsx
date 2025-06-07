@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 
 function Profile() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
+  const [user2, setUser2] = useState(false);
   const [setting, setSetting] = useState(false);
   return (
     <div className=" w-full h-[100vh] ">
@@ -52,17 +53,19 @@ function Profile() {
               )}
             </div>
           ) : (
-            <div className=" flex items-center justify-center gap-[20px] p-[20px]  ">
-              <Link
-                to="/signin"
-                className=" flex items-center justify-center w-[100px] border-[0.8px] border-gray-500 text-gray-500 hover:bg-blue-600 hover:border-none hover:text-white  text-[14px] font-bold py-[8px] rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className=" flex items-center justify-center w-[100px] bg-blue-600 py-[8px] text-white text-[14px] font-bold  rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
-                SignUp
-              </Link>
+            <div className="bg-blue-600  rounded-[30px] text-white flex flex-col gap-[8px] p-5">
+              <div className=" flex items-center justify-center gap-[20px] p-[20px]   ">
+                <Link
+                  to="/signin"
+                  className=" flex items-center justify-center w-[100px] border-[0.8px] border-gray-300 text-gray-300 hover:bg-blue-600 hover:border-none hover:text-white  text-[14px] font-bold py-[8px] rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className=" flex items-center justify-center w-[100px] bg-black py-[8px] text-white text-[14px] font-bold  rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
+                  SignUp
+                </Link>
+              </div>
             </div>
           )}
         </section>
