@@ -5,7 +5,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] sm:bg-gray-200">
+    <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] sm:bg-gray-200 overflow-hidden">
       {/* mobile container   */}
       <main className=" relative flex sm:flex-col sm:gap-[30px] sm:shadow-sm  sm:bg-gray-100 bg-white sm:rounded-2xl  items-end sm:h-fit h-screen overflow-scroll  sm:w-[700px] w-full">
         <Link
