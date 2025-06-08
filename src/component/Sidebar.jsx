@@ -13,8 +13,8 @@ function Sidebar() {
         {/* logo */}
         <section className=" flex items-center gap-[4px]  py-[26px]">
           <img
-            src=""
-            alt="//"
+            src="logotest.JPG"
+            alt="logo"
             className="w-[48px] h-[48px] object-cover bg-white rounded-full"
           />
           <h1 className=" text-[24px] font-[600] text-white">UNN Sports Hub</h1>

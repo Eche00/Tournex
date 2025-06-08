@@ -4,13 +4,14 @@ import { Link } from "react-router";
 function Header() {
   return (
     <div className="shadow-b-black shadow-2xl  fixed top-0 left-0 w-full bg-white z-50">
-      <div className=" flex items-center justify-between py-[10px] sm:px-[50px] px-[10px] ">
+      {/* container */}
+      <main className=" flex items-center justify-between py-[10px] sm:px-[50px] px-[10px] ">
         {/* logo */}
         <section>
           <img
-            src=""
-            alt="//"
-            className="w-[50px] h-[50px] object-cover bg-gray-300 rounded-full"
+            src="/logotest.JPG"
+            alt="logo"
+            className="w-[50px] h-[50px] object-cover border-gray-300 border-2 rounded-full "
           />
         </section>
 
@@ -27,7 +28,7 @@ function Header() {
             SignUp
           </Link>
         </section>
-      </div>
+      </main>
     </div>
   );
 }

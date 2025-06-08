@@ -10,7 +10,9 @@ function Mobilenav() {
   const location = useLocation();
   return (
     <div className=" w-[90%] mx-auto shadow-black shadow-2xl rounded-[20px] bg-white">
+      {/* container  */}
       <nav className=" h-[55px] py-[10px] px-[20px] flex items-center justify-between w-full   text-[12px] ">
+        {/* home  */}
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -21,6 +23,8 @@ function Mobilenav() {
           {" "}
           <HouseIcon /> {location.pathname === "/" && <span>Home</span>}
         </NavLink>
+
+        {/* news  */}
         <NavLink
           to="/news"
           className={({ isActive }) =>
@@ -32,6 +36,7 @@ function Mobilenav() {
           <NewspaperIcon /> {location.pathname === "/news" && <span>News</span>}
         </NavLink>
 
+        {/* matches  */}
         <NavLink
           to="/matches"
           className={({ isActive }) =>
@@ -44,6 +49,7 @@ function Mobilenav() {
           {location.pathname === "/matches" && <span>Matches</span>}
         </NavLink>
 
+        {/* search */}
         <NavLink
           to="/search"
           className={({ isActive }) =>
@@ -56,6 +62,7 @@ function Mobilenav() {
           {location.pathname === "/search" && <span>Search</span>}
         </NavLink>
 
+        {/* profile  */}
         <NavLink
           to="/profile"
           className={({ isActive }) =>
