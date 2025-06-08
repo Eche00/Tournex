@@ -7,24 +7,26 @@ function Signin() {
 
   return (
     <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] sm:bg-gray-200 overflow-hidden">
-      {/* mobile container   */}
+      {/*  container   */}
       <main className=" relative flex sm:flex-col sm:gap-[30px] sm:shadow-sm  sm:bg-gray-100 bg-white sm:rounded-2xl  items-end sm:h-fit h-screen overflow-scroll  sm:w-[700px] w-full">
+        {/* exit page  */}
         <Link
           to="/"
           className="absolute top-2 left-2 text-white z-50 bg-[#1e222b] rounded-full p-2 flex items-center justify-center">
           <CloseIcon fontSize="medium" />
         </Link>
+        {/* logo  */}
         <img
           className="w-full h-[300px]  border-none object-cover sm:object-contain sm:relative absolute top-0 z-0 sm:mt-[50px]"
           src="/logotest.JPG"
           alt=""
         />
-
+        {/* subcontainer */}
         <div className=" bg-blue-700 shadow-2xl shadow-black w-full  z-50  sm:h-fit h-[60vh] rounded-t-[50px] sm:pb-[20px] pb-5 overflow-scroll">
           <h1 className=" text-center text-white font-bold font-serif my-[30px] text-[20px]">
             Sign in
           </h1>
-
+          {/* form container  */}
           <form className="w-[80%] mx-auto md:w-[40%]">
             <div className=" flex flex-col gap-[5px] my-5 font-bold">
               <p className=" text-white">Email:</p>
