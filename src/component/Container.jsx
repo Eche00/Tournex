@@ -7,8 +7,10 @@ import Sidebar from "./Sidebar";
 function Container() {
   return (
     <div className="h-[100vh] relative sm:h-full ">
+      {/* header  */}
       <Header />
 
+      {/* outlet for pages and sidebar  */}
       <section className=" w-full flex mt-[65px] relative">
         <div className="hidden sm:flex fixed top-[65px] left-0">
           <Sidebar />
@@ -17,6 +19,7 @@ function Container() {
           <Outlet />
         </div>
       </section>
+      {/* mobile navigation  */}
       <section className="  fixed sm:hidden flex bottom-[10px] w-full">
         <Mobilenav />
       </section>

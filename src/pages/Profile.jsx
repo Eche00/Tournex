@@ -4,11 +4,12 @@ import { Link } from "react-router";
 
 function Profile() {
   const [user, setUser] = useState(false);
-  const [user2, setUser2] = useState(false);
   const [setting, setSetting] = useState(false);
   return (
     <div className=" w-full h-[100vh] ">
+      {/* container  */}
       <main className="w-full h-[100vh] flex flex-col sm:items-start items-center  gap-[20px]">
+        {/* profile picture  */}
         <section className="sm:w-5xl sm:mx-auto w-full flex sm:items-center sm:justify-start justify-center">
           <img
             src="/logotest.JPG"
@@ -16,13 +17,16 @@ function Profile() {
             className="w-[200px] h-[200px] rounded-full object-cover border-[5px] border-gray-400"
           />
         </section>
+        {/* user cresidentials/routes  */}
         <section className="sm:w-5xl sm:mx-auto w-full flex flex-col  rounded-4xl">
           {user ? (
+            // if user exist the cresidentials
             <div className="flex flex-col bg-gray-300  rounded-t-[60px]  rounded-b-[40px] gap-[20px]">
               <div className="bg-blue-600  rounded-[30px] text-white flex flex-col gap-[8px] p-5">
                 <p className=" text-[14px] font-bold">@username</p>
                 <p className=" text-[14px] font-[400]">test@gmail.com</p>
               </div>
+              {/* create tournament and viewing all tournament route  */}
               <div className=" flex flex-row items-center justify-center gap-[10px] pb-[20px] border-b border-white">
                 <button
                   to="/"
@@ -35,12 +39,14 @@ function Profile() {
                   My Tournaments
                 </button>
               </div>
+              {/* settings dropdown controller */}
               <p
                 className=" flex items-center justify-between gap-[10px] pb-[20px] px-[20px] cursor-pointer"
                 onClick={() => setSetting(!setting)}>
                 <Settings />
                 <span> {setting ? <ArrowDropUp /> : <ArrowDropDown />}</span>
               </p>
+              {/* settings dropdown  */}
               {setting && (
                 <div className=" flex items-center justify-center gap-[10px] pb-[20px] px-[20px]">
                   <button className="w-[130px] bg-[#1e222b] py-[8px] text-white  rounded-[10px] cursor-pointer">
@@ -53,6 +59,7 @@ function Profile() {
               )}
             </div>
           ) : (
+            // if user dosent exist routes to auth
             <div className="bg-blue-600  rounded-[30px] text-white flex flex-col gap-[8px] p-5">
               <div className=" flex items-center justify-center gap-[20px] p-[20px]   ">
                 <Link
@@ -69,6 +76,7 @@ function Profile() {
             </div>
           )}
         </section>
+        {/* tournament lists */}
         <section>My Tournaments</section>
       </main>
     </div>
