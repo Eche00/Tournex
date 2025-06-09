@@ -3,7 +3,7 @@ import React from "react";
 function Welcome({ setHome }) {
   return (
     <div>
-      <div className=" text-black bg-white h-[100vh] relative overflow-hidden">
+      <div className=" text-black bg-white h-[100vh] relative overflow-hidden overscroll-none">
         {" "}
         <div className=" flex items-center justify-center gap-[15px] flex-col h-full">
           {/* image section  */}
@@ -11,27 +11,30 @@ function Welcome({ setHome }) {
             {/* logo  */}
             <img
               className="w-[100px] h-[100px] rounded-full border-2 border-blue-600"
-              src="/logotest.JPG"
+              src="/logo.webp"
               alt="logo"
             />
-            {/* unn logo  */}
+            {/* trophy logo  */}
             <img
               className="w-[80px] h-[80px] rounded-full border-2 border-blue-600"
-              src="/"
-              alt=""
+              src="/trophy.webp"
+              alt="trophy logo"
             />
-            {/* football logo  */}
+            {/* game logo  */}
             <img
               className="w-[60px] h-[60px] rounded-full border-2 border-blue-600"
-              src="/"
-              alt=""
+              src="/pad.webp"
+              alt="game logo"
             />
           </section>
           {/* write up  */}
           <h1 className="text-[16px] font-[400">
-            Welcome to{" "}
-            <span className="text-[20px] font-bold font-serif">
-              Chiomy's bakery
+            <span
+              className="text-[24px] font-bold  font-sans text-white leading-1 tracking-wider"
+              style={{
+                WebkitTextStroke: "2px #155dfc",
+              }}>
+              Tournex
             </span>
           </h1>
           {/* button  */}

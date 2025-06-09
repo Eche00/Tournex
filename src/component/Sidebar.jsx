@@ -11,13 +11,19 @@ function Sidebar() {
     <div className=" w-[300px] h-[100vh] bg-blue-600">
       <nav className=" flex flex-col   text-[14px] px-[20px] py-[10px] gap-[5px]">
         {/* logo */}
-        <section className=" flex items-center gap-[4px]  py-[26px]">
+        <section className=" flex items-center gap-[4px]  py-[26px] ">
           <img
-            src="logotest.JPG"
+            src="logo.webp"
             alt="logo"
             className="w-[48px] h-[48px] object-cover bg-white rounded-full"
           />
-          <h1 className=" text-[24px] font-[600] text-white">UNN Sports Hub</h1>
+          <h1
+            className=" text-[24px] font-[600] text-blue-600 tracking-wider "
+            style={{
+              WebkitTextStroke: "2px white",
+            }}>
+            Tournex
+          </h1>
         </section>
         <NavLink
           to="/"
