@@ -5,11 +5,11 @@ function Header() {
   return (
     <div className="shadow-b-black shadow-2xl  fixed top-0 left-0 w-full bg-white z-50">
       {/* container */}
-      <main className=" flex items-center justify-between py-[10px] sm:px-[50px] px-[10px] ">
+      <main className=" flex items-center justify-between py-[10px] sm:px-[20px] px-[10px] ">
         {/* logo */}
         <section>
           <img
-            src="/logotest.JPG"
+            src="/logo.webp"
             alt="logo"
             className="w-[50px] h-[50px] object-cover border-gray-300 border-2 rounded-full "
           />
