@@ -5,7 +5,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className=" sm:flex sm:items-center sm:justify-center h-auto sm:h-[100vh] sm:bg-gray-200 overflow-hidden">
+    <div className=" sm:flex sm:items-center sm:justify-center h-auto sm:h-[100vh] sm:bg-gray-200 overflow-hidden overscroll-none">
       {/* mobile container   */}
       <main className=" relative flex sm:flex-col sm:gap-[30px] sm:shadow-sm  sm:bg-gray-100 bg-white sm:rounded-2xl  items-end sm:h-fit h-screen overflow-scroll  sm:w-[700px] w-full">
         {/* exit page */}
@@ -17,8 +17,8 @@ function Signup() {
         {/* logo  */}
         <img
           className="w-full h-[300px]  border-none object-cover sm:object-contain sm:relative absolute top-0 z-0 sm:mt-[50px]"
-          src="/logotest.JPG"
-          alt=""
+          src="/logo.webp"
+          alt="logo"
         />
         {/* subcontainer  */}
         <div className=" bg-blue-700 shadow-2xl shadow-black w-full  z-50  sm:h-fit h-[60vh] rounded-t-[50px] sm:pb-[20px] pb-5 overflow-scroll">
