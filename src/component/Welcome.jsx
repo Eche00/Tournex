@@ -1,11 +1,15 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setTheme,toggleTheme } from "../redux/theme/themeSlice";
 
 function Welcome({ setHome }) {
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
   return (
     <div
       className=" overflow-hidden"
       style={{ height: "calc(var(--vh) * 100)" }}>
-      <div className=" text-black bg-white h-[100vh] relative overflow-hidden overscroll-none">
+      <div className=" text-black bg-white dark:bg-[#1F1F1F] h-screen relative overflow-hidden overscroll-none">
         {" "}
         <div className=" flex items-center justify-center gap-[15px] flex-col h-full">
           {/* image section  */}
@@ -32,9 +36,9 @@ function Welcome({ setHome }) {
           {/* write up  */}
           <h1 className="text-[16px] font-[400">
             <span
-              className="text-[24px] font-bold  font-sans text-white leading-1 tracking-wider"
+              className="text-[26px] font-bold  font-sans text-white dark:text-[#1F1F1F] leading-1 tracking-widest"
               style={{
-                WebkitTextStroke: "2px #155dfc",
+                WebkitTextStroke: "2px  #2563eb",
               }}>
               Tournex
             </span>
@@ -45,6 +49,14 @@ function Welcome({ setHome }) {
             onClick={() => setHome(false)}>
             Explore
           </button>
+
+          <section className=" flex gap-10">
+            <button
+              className=" text-white bg-blue-600"
+              onClick={() => dispatch(toggleTheme())}>
+              on
+            </button>
+          </section>
         </div>
         {/* bg animation design */}
         <span className="w-[200px] h-[200px] bg-blue-600 rounded-full absolute top-[-50px] left-[-50px]"></span>

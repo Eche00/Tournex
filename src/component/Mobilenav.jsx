@@ -9,7 +9,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 function Mobilenav() {
   const location = useLocation();
   return (
-    <div className=" w-[90%] mx-auto shadow-black shadow-2xl rounded-[20px] bg-white">
+    <div className=" w-[90%] mx-auto shadow-black shadow-2xl  rounded-[20px] bg-white dark:bg-[#1F1F1F] dark:border-[1px] dark:border-gray-600">
       {/* container  */}
       <nav className=" h-[55px] py-[10px] px-[20px] flex items-center justify-between w-full   text-[12px] ">
         {/* home  */}

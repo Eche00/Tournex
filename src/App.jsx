@@ -15,7 +15,7 @@ function App() {
   const [home, setHome] = useState(true);
 
   return (
-    <div className=" text-black  h-auto overflow-hidden">
+    <div className=" text-white  h-auto overflow-hidden bg-white  dark:bg-[#1F1F1F]">
       {home ? (
         <Welcome setHome={setHome} />
       ) : (
