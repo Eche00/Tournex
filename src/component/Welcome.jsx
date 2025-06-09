@@ -2,7 +2,9 @@ import React from "react";
 
 function Welcome({ setHome }) {
   return (
-    <div>
+    <div
+      className=" overflow-hidden"
+      style={{ height: "calc(var(--vh) * 100)" }}>
       <div className=" text-black bg-white h-[100vh] relative overflow-hidden overscroll-none">
         {" "}
         <div className=" flex items-center justify-center gap-[15px] flex-col h-full">
