@@ -12,7 +12,7 @@ function Profile() {
         {/* profile picture  */}
         <section className="sm:w-5xl sm:mx-auto w-full flex sm:items-center sm:justify-start justify-center">
           <img
-            src="/logotest.JPG"
+            src="/avatar.webp"
             alt="avatar"
             className="w-[200px] h-[200px] rounded-full object-cover border-[5px] border-gray-400"
           />
