@@ -16,11 +16,11 @@ function ForgotPassword() {
         </Link>
         <img
           className="w-full h-[300px]  border-none object-cover sm:object-contain sm:relative absolute top-0 z-0 sm:mt-[50px]"
-          src="/logotest.JPG"
+          src="/logo.webp"
           alt=""
         />
 
-        <div className=" bg-blue-700 shadow-2xl shadow-black w-full  z-50  sm:h-fit h-[65vh] rounded-t-[50px] sm:pb-[20px]">
+        <div className=" bg-blue-700 shadow-2xl shadow-black w-full  z-50  sm:h-fit h-[60vh] rounded-t-[50px] sm:pb-[20px]">
           <h1 className=" text-center text-white font-bold font-serif my-[30px] text-[20px]">
             Reset Password
           </h1>
