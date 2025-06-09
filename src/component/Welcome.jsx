@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme,toggleTheme } from "../redux/theme/themeSlice";
+import { setTheme } from "../redux/theme/themeSlice";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 function Welcome({ setHome }) {
   const { theme } = useSelector((state) => state.theme);
@@ -52,9 +54,14 @@ function Welcome({ setHome }) {
 
           <section className=" flex gap-10">
             <button
-              className=" text-white bg-blue-600"
-              onClick={() => dispatch(toggleTheme())}>
-              on
+              className={theme === 'light' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}
+              onClick={() => dispatch(setTheme('light'))}>
+              <LightModeIcon/>
+            </button>
+            <button
+              className={theme === 'dark' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}
+              onClick={() => dispatch(setTheme('dark'))}>
+              <DarkModeIcon/>
             </button>
           </section>
         </div>

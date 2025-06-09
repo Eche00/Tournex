@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../redux/theme/themeSlice";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 function Profile() {
   const [user, setUser] = useState(true);
@@ -54,9 +56,9 @@ function Profile() {
               {setting && (
                 <div className='flex flex-col'>
 
-                <div className=" flex items-center  gap-[10px] pb-[10px] px-[20px] border-b border-white dark:border-[#1F1F1F]">
-                  <button onClick={()=>dispatch(setTheme('light'))}>sun</button>
-                  <button onClick={()=>dispatch(setTheme('dark'))}>moon</button>
+                <div className=" flex items-center justify-center  gap-[10px] pb-[10px] px-[20px] border-b border-white dark:border-[#1F1F1F]">
+                  <button onClick={()=>dispatch(setTheme('light'))} className={theme === 'light' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><LightModeIcon/></button>
+                  <button onClick={()=>dispatch(setTheme('dark'))} className={theme === 'dark' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><DarkModeIcon/></button>
                 </div>
                 <div className="flex items-center justify-center gap-[10px] py-[20px] px-[20px]">
                   <button className="w-[130px] bg-[#1e222b] py-[8px] text-white  rounded-[10px] cursor-pointer">
