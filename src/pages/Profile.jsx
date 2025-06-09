@@ -7,7 +7,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 function Profile() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [setting, setSetting] = useState(false);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -73,8 +73,8 @@ function Profile() {
             </div>
           ) : (
             // if user dosent exist routes to auth
-            <div className="bg-blue-600  rounded-[30px] text-white flex flex-col gap-[8px] p-5">
-              <div className=" flex items-center justify-center gap-[20px] p-[20px]   ">
+            <div className="bg-gray-300 dark:bg-gray-400 rounded-[30px] text-white flex flex-col gap-[8px]  overflow-hidden">
+              <div className="bg-blue-600 flex items-center justify-center gap-[20px] p-[20px]   ">
                 <Link
                   to="/signin"
                   className=" flex items-center justify-center w-[100px] border-[0.8px] border-gray-300 text-gray-300 hover:bg-blue-600 hover:border-none hover:text-white  text-[14px] font-bold py-[8px] rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
@@ -86,6 +86,24 @@ function Profile() {
                   SignUp
                 </Link>
               </div>
+              {/* settings dropdown controller */}
+              <p
+                className=" flex items-center justify-between gap-[10px] py-[20px] px-[20px] cursor-pointer text-[#1F1F1F] dark:text-white"
+                onClick={() => setSetting(!setting)}>
+                <Settings />
+                <span> {setting ? <ArrowDropUp /> : <ArrowDropDown />}</span>
+              </p>
+              {/* settings dropdown  */}
+              {setting && (
+                <div className='flex flex-col'>
+
+                <div className=" flex items-center justify-center  gap-[10px] py-[20px] px-[20px] border-t border-white dark:border-[#1F1F1F]">
+                  <button onClick={()=>dispatch(setTheme('light'))} className={theme === 'light' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><LightModeIcon/></button>
+                  <button onClick={()=>dispatch(setTheme('dark'))} className={theme === 'dark' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><DarkModeIcon/></button>
+                </div>
+              
+                </div>
+              )}
             </div>
           )}
         </section>
