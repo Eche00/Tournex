@@ -1,52 +1,90 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import EmailIcon from "@mui/icons-material/Email";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function Signin() {
   const [loading, setLoading] = useState(false);
+  // password visibility
+  const [visible, setVisible] = useState(false);
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
   return (
-    <div
-      className=" sm:flex sm:items-center sm:justify-center h-[100vh] sm:bg-gray-200 overflow-hidden overscroll-none"
-      style={{ height: "calc(var(--vh) * 100)" }}>
-      {/*  container   */}
-      <main className=" relative flex sm:flex-col sm:gap-[30px] sm:shadow-sm  sm:bg-gray-100 bg-white sm:rounded-2xl  items-end sm:h-fit h-screen overflow-scroll  sm:w-[700px] w-full">
-        {/* exit page  */}
-        <Link
-          to="/"
-          className="absolute top-2 left-2 text-white z-50 bg-[#1e222b] rounded-full p-2 flex items-center justify-center">
-          <CloseIcon fontSize="medium" />
+    <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] bg-white dark:bg-[#1F1F1F] overflow-hidden overscroll-none ">
+      {/* mobile container   */}
+      <main className=" relative flex flex-col  sm:shadow-2xl   sm:rounded-2xl  sm:h-fit h-screen  sm:w-[700px] w-full p-[20px] sm:border-2 border-gray-700">
+        {/* exit page */}
+        <Link to="/" className="rounded-full p-2 ">
+          <img
+            src="/logo.webp"
+            alt="logo"
+            className="w-[50px] h-[50px] object-cover border-gray-300 border-2 rounded-full "
+          />
         </Link>
-        {/* logo  */}
-        <img
-          className="w-full h-[300px]  border-none object-cover sm:object-contain sm:relative absolute top-0 z-0 sm:mt-[50px]"
-          src="/logo.webp"
-          alt="logo"
-        />
-        {/* subcontainer */}
-        <div className=" bg-blue-700 shadow-2xl shadow-black w-full  z-50  sm:h-fit h-[60vh] rounded-t-[50px] sm:pb-[20px] pb-5 overflow-scroll">
-          <h1 className=" text-center text-white font-bold font-serif my-[30px] text-[20px]">
-            Sign in
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          className="absolute top-2 right-2  z-50 dark:text-white text-[#1F1F1F] rounded-full p-2 flex items-center justify-center">
+          <CloseIcon fontSize="medium" />
+        </button>
+
+        {/* subcontainer  */}
+        <div className=" w-[90%] mx-auto md:w-[60%]">
+          <h1 className=" text-start dark:text-white text-black font-bold font-serif my-[30px]  text-[20px]">
+            Login to your account
           </h1>
           {/* form container  */}
-          <form className="w-[80%] mx-auto md:w-[40%]">
-            <div className=" flex flex-col gap-[5px] my-5 font-bold">
-              <p className=" text-white">Email:</p>
-              <input
-                className=" bg-transparent border-2 border-white w-full rounded-[10px] px-5 py-2 outline-none text-white"
-                type="text"
-                name="email"
-              />
+          <form className="w-full">
+            <div className=" flex flex-col gap-[5px] my-5 ">
+              <p className=" dark:text-gray-500 text-black">Email:</p>
+              <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
+                <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
+                  <EmailIcon fontSize="" />
+                </span>
+                <input
+                  className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
+                  type="text"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
             </div>
-            <div className=" flex flex-col gap-[5px] my-5 font-bold">
-              <p className="text-white">Password:</p>
-              <input
-                className=" bg-transparent border-2 border-white w-full rounded-[10px] px-5 py-2 outline-none text-white"
-                type="password"
-              />
+            <div className=" flex flex-col gap-[5px] my-5 ">
+              <p className=" dark:text-gray-500 text-black">Password:</p>
+              <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
+                <span
+                  className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2 cursor-pointer"
+                  onClick={() => setVisible(!visible)}>
+                  {visible ? (
+                    <VisibilityIcon fontSize="" />
+                  ) : (
+                    <VisibilityOffIcon fontSize="" />
+                  )}
+                </span>
+                <input
+                  className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
+                  type={visible ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter your password"
+                  minLength={8}
+                />
+              </div>
+            </div>
+            <div className="  flex items-center gap-[10px] ">
+              <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
+              <span className=" text-gray-400 dark:text-gray-700">
+                {" "}
+                <KeyboardArrowDownIcon />
+              </span>
+              <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
             </div>
             <div className=" w-full flex items-center justify-center flex-col">
-              <button className="bg-[#1e222b] px-[35px] py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer">
+              <button className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer">
                 {loading ? (
                   <div role="status">
                     <svg
@@ -67,21 +105,21 @@ function Signin() {
                     <span className="sr-only">Loading...</span>
                   </div>
                 ) : (
-                  "Sign In"
+                  "Sign in"
                 )}
               </button>
             </div>
-            <p className="text-sm font-bold text-center">
+            <p className="text-sm font-bold text-center dark:text-white text-black">
               Don't have an account ?{" "}
-              <Link to="/signup" className=" underline text-[#1e222b]">
+              <Link to="/signup" className=" underline text-blue-600">
                 Sign up
               </Link>
             </p>
-            <Link
-              to="/forgotpassword"
-              className="text-[10px] text-white font-bold  hover:underline cursor-pointer text-center flex items-center justify-center w-full">
-              Forgot password ?
-            </Link>
+            <p className="text-sm font-bold text-center my-2">
+              <Link to="/forgotpassword" className="  text-blue-600 ">
+                Forgotten password
+              </Link>
+            </p>
           </form>
         </div>
       </main>
