@@ -15,7 +15,7 @@ function Signup() {
   return (
     <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] bg-white dark:bg-[#1F1F1F] overflow-hidden overscroll-none ">
       {/* mobile container   */}
-      <main className=" relative flex flex-col  sm:shadow-2xl   sm:rounded-2xl  sm:h-fit h-screen  sm:w-[700px] w-full p-[20px] sm:border-2 border-gray-700">
+      <main className=" relative flex flex-col  sm:shadow-2xl   sm:rounded-2xl  sm:h-fit h-screen  sm:w-[700px] w-full p-[20px] dark:sm:border-2 dark:border-gray-700">
         {/* exit page */}
         <Link to="/" className="rounded-full p-2 ">
           <img
