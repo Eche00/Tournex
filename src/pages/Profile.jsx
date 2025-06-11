@@ -2,113 +2,136 @@ import { Settings, ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme } from "../redux/theme/themeSlice";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import { setTheme, toggleTheme } from "../redux/theme/themeSlice";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import LocationOn from "@mui/icons-material/LocationOn";
+import Profilebottom from "./Profilebottom";
 
 function Profile() {
   const [user, setUser] = useState(false);
+  const [about, setAbout] = useState(true);
   const [setting, setSetting] = useState(false);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+
+  // handle setting toggle
+  const settingToggle = (e) => {
+    if (e.target.id === "about") {
+      setAbout(true);
+      setSetting(false);
+    } else if (e.target.id === "setting") {
+      setAbout(false);
+      setSetting(true);
+    }
+  };
   return (
-    <div className=" w-full h-[100vh] ">
+    <div className=" w-full sm:h-[100vh] h-full overflow-scroll sm:pb-0 pb-[100px]">
       {/* container  */}
-      <main className="w-full h-[100vh] flex flex-col sm:items-start items-center  gap-[20px]">
-        {/* profile picture  */}
-        <section className="sm:w-5xl sm:mx-auto w-full flex sm:items-center sm:justify-start justify-center">
-          <img
-            src="/avatar.webp"
-            alt="avatar"
-            className="w-[200px] h-[200px] rounded-full object-cover border-[5px] border-gray-400"
-          />
+      <main className="  flex lg:flex-row flex-col gap-[20px]  w-full sm:p-[20px]  ">
+        {/* subcontainer  */}
+        <section className=" flex flex-col items-center  justify-center gap-[20px]  dark:sm:border-2 dark:border-gray-700  sm:shadow-2xl   sm:rounded-2xl sm:p-10 p-5 lg:w-[30%] h-fit">
+          {/* avatar */}
+          <div className="py-[20px] border-b-2 dark:border-gray-700 border-gray-300 sm:shadow-b-2xl flex flex-col sm:items-start  items-center justify-center    w-full">
+            {" "}
+            <img
+              src="/avatar.webp"
+              alt="avatar"
+              className="w-[150px] h-[150px] rounded-[20px] object-cover border-[5px] border-gray-400"
+            />
+          </div>
+          {/* user info  */}
+          <div className="sm:hidden flex sm:flex-row  items-baseline justify-between w-full">
+            <h1 className=" text-start dark:text-white text-black font-bold font-serif  text-[20px]">
+              @John_Doe
+              <br />
+              <span className="  text-blue-600  rounded-[10px] text-sm font-extrabold">
+                Call of duty
+              </span>
+            </h1>
+            <p className=" flex items-baseline text-blue-600  bg-blue-600/20 px-[10px] py-[8px] rounded-[10px] text-sm font-extrabold">
+              <LocationOn fontSize="small" /> Nigeria
+            </p>
+          </div>
+          {/* bio  */}
+          <p className=" sm:hidden block bg-gray-100 dark:bg-black border-2 border-gray-300 dark:border-gray-700 dark:text-white text-black  p-[20px] rounded-xl my-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            eligendi eaque eius quo distinctio, at commodi, quibusdam quae
+            mollitia laborum natus dolorum. Facilis eius sed soluta placeat.
+            Tempore, numquam et.
+          </p>
+          {/* theme toggle  */}
+          <div className=" flex items-center bg-gray-300 dark:bg-black  rounded-[10px] w-full">
+            <button
+              onClick={() => dispatch(setTheme("light"))}
+              className={
+                theme === "light"
+                  ? "flex-1  bg-blue-600 cursor-pointer px-[10px] py-[8px] rounded-[10px] transition-all duration-300"
+                  : "flex-1  bg-transparent cursor-pointer px-[10px] py-[8px] rounded-[10px] transition-all duration-300"
+              }>
+              <LightModeIcon />
+            </button>
+            <button
+              onClick={() => dispatch(setTheme("dark"))}
+              className={
+                theme === "dark"
+                  ? "flex-1  bg-blue-600 cursor-pointer px-[10px] py-[8px] rounded-[10px] transition-all duration-300"
+                  : "flex-1  bg-transparent cursor-pointer px-[10px] py-[8px] rounded-[10px] transition-all duration-300"
+              }>
+              <DarkModeIcon />
+            </button>
+          </div>
         </section>
-        {/* user cresidentials/routes  */}
-        <section className="sm:w-5xl sm:mx-auto w-full flex flex-col  rounded-4xl">
-          {user ? (
-            // if user exist the cresidentials
-            <div className="flex flex-col bg-gray-300 dark:bg-gray-400  rounded-t-[60px]  rounded-b-[40px] gap-[20px]">
-              <div className="bg-blue-600  rounded-[30px] text-white flex flex-col gap-[8px] p-5">
-                <p className=" text-[14px] font-bold">@username</p>
-                <p className=" text-[14px] font-[400]">test@gmail.com</p>
-              </div>
-              {/* create tournament and viewing all tournament route  */}
-              <div className=" flex flex-row items-center justify-center gap-[10px] pb-[20px] border-b border-white dark:border-[#1F1F1F]">
-                <button
-                  to="/"
-                  className=" flex items-center justify-center w-[130px] border-[1px] border-gray-500 text-gray-500 dark:border-black dark:text-black hover:bg-blue-600 hover:border-none hover:text-white  text-[12px] font-extrabold py-[8px] rounded-[10px] cursor-pointer  transition-all duration-300 whitespace-nowrap">
-                  Create Tournament
-                </button>
-                <button
-                  to="/"
-                  className=" flex items-center justify-center w-[130px]  bg-blue-600 py-[8px] text-white text-[12px] font-bold  rounded-[10px] cursor-pointer  transition-all duration-300 whitespace-nowrap border-transparent">
-                  My Tournaments
-                </button>
-              </div>
-              {/* settings dropdown controller */}
-              <p
-                className=" flex items-center justify-between gap-[10px] pb-[20px] px-[20px] cursor-pointer text-[#1F1F1F] dark:text-white"
-                onClick={() => setSetting(!setting)}>
-                <Settings />
-                <span> {setting ? <ArrowDropUp /> : <ArrowDropDown />}</span>
-              </p>
-              {/* settings dropdown  */}
-              {setting && (
-                <div className='flex flex-col'>
 
-                <div className=" flex items-center justify-center  gap-[10px] pb-[10px] px-[20px] border-b border-white dark:border-[#1F1F1F]">
-                  <button onClick={()=>dispatch(setTheme('light'))} className={theme === 'light' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><LightModeIcon/></button>
-                  <button onClick={()=>dispatch(setTheme('dark'))} className={theme === 'dark' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><DarkModeIcon/></button>
-                </div>
-                <div className="flex items-center justify-center gap-[10px] py-[20px] px-[20px]">
-                  <button className="w-[130px] bg-[#1e222b] py-[8px] text-white  rounded-[10px] cursor-pointer">
-                    Logout
-                  </button>
-                  <button className="w-[130px] bg-red-700 py-[8px] text-white  rounded-[10px] cursor-pointer">
-                    Delete Acount
-                  </button>
-                </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            // if user dosent exist routes to auth
-            <div className="bg-gray-300 dark:bg-gray-400 rounded-[30px] text-white flex flex-col gap-[8px]  overflow-hidden">
-              <div className="bg-blue-600 flex items-center justify-center gap-[20px] p-[20px]   ">
-                <Link
-                  to="/signin"
-                  className=" flex items-center justify-center w-[100px] border-[0.8px] border-gray-300 text-gray-300 hover:bg-blue-600 hover:border-none hover:text-white  text-[14px] font-bold py-[8px] rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
-                  Login
-                </Link>
-                <Link
-                  to="/signup"
-                  className=" flex items-center justify-center w-[100px] bg-black py-[8px] text-white text-[14px] font-bold  rounded-[10px] cursor-pointer hover:scale-105 transition-all duration-300">
-                  SignUp
-                </Link>
-              </div>
-              {/* settings dropdown controller */}
-              <p
-                className=" flex items-center justify-between gap-[10px] py-[20px] px-[20px] cursor-pointer text-[#1F1F1F] dark:text-white"
-                onClick={() => setSetting(!setting)}>
-                <Settings />
-                <span> {setting ? <ArrowDropUp /> : <ArrowDropDown />}</span>
-              </p>
-              {/* settings dropdown  */}
-              {setting && (
-                <div className='flex flex-col'>
-
-                <div className=" flex items-center justify-center  gap-[10px] py-[20px] px-[20px] border-t border-white dark:border-[#1F1F1F]">
-                  <button onClick={()=>dispatch(setTheme('light'))} className={theme === 'light' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><LightModeIcon/></button>
-                  <button onClick={()=>dispatch(setTheme('dark'))} className={theme === 'dark' ? "  text-blue-600 cursor-pointer":"  text-gray-500 cursor-pointer"}><DarkModeIcon/></button>
-                </div>
-              
-                </div>
-              )}
-            </div>
-          )}
+        {/* subcontainer 2  */}
+        <section className=" flex-1 dark:sm:border-2 dark:border-gray-700  sm:shadow-2xl   sm:rounded-2xl sm:p-10 p-5 ">
+          {/* username/location  */}
+          <div className="sm:flex hidden sm:flex-row  items-baseline justify-between">
+            <h1 className=" text-start dark:text-white text-black font-bold font-serif  text-[20px]">
+              @John_Doe <br />
+              <span className="  text-blue-600  rounded-[10px] text-sm font-extrabold">
+                Call of duty
+              </span>
+            </h1>
+            <p className=" flex items-baseline text-blue-600  bg-blue-600/20 px-[10px] py-[8px] rounded-[10px] text-sm font-extrabold">
+              <LocationOn fontSize="small" /> Nigeria
+            </p>
+          </div>
+          {/* bio  */}
+          <p className="hidden sm:block bg-gray-100 dark:bg-black border-2 border-gray-300 dark:border-gray-700 dark:text-white text-black  p-[20px] rounded-xl my-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            eligendi eaque eius quo distinctio, at commodi, quibusdam quae
+            mollitia laborum natus dolorum. Facilis eius sed soluta placeat.
+            Tempore, numquam et.
+          </p>
+          {/* bottom navigation section  */}
+          <div className="pt-[10px] sm:mt-20 border-b-2 dark:border-gray-700 border-gray-300 sm:shadow-b-2xl    w-full flex items-center sm:justify-start justify-between gap-[20px]">
+            <button
+              className={`w-[120px] text-center font-bold   text-[16px] m-0 leading-1 py-5 ${
+                about
+                  ? "border-b-3 text-blue-600 border-blue-600 "
+                  : "dark:text-white text-black"
+              }  transition-all duration-200 cursor-pointer`}
+              onClick={settingToggle}
+              id="about">
+              About
+            </button>
+            <button
+              className={`w-[120px] text-center font-bold   text-[16px] m-0 leading-1 py-5 ${
+                setting
+                  ? "border-b-3 text-blue-600 border-blue-600 "
+                  : "dark:text-white text-black"
+              }  transition-all duration-200 cursor-pointer`}
+              onClick={settingToggle}
+              id="setting">
+              Settings
+            </button>
+          </div>
+          {/* bottom section  */}
+          <div className=" my-5 w-full">
+            <Profilebottom about={about} />
+          </div>
         </section>
-        {/* tournament lists */}
-        <section>My Tournaments</section>
       </main>
     </div>
   );
