@@ -5,11 +5,45 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import EmailIcon from "@mui/icons-material/Email";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import HomeIcon from "@mui/icons-material/Home";
+import PublicIcon from "@mui/icons-material/Public";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import WcIcon from "@mui/icons-material/Wc";
 function Profilebottom({ about }) {
   const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState(false);
+  const [gender, setGender] = useState(false);
+  const [sign, setSign] = useState(false);
+  const [formData, setFormData] = useState({
+    sign: "Select sign",
+    gender: "Select gender",
+    category: "Select category",
+  });
 
+  // zodiac sign list
+  const zodiacSigns = [
+    { sign: "Aquarius", dates: "January 20 - February 18" },
+    { sign: "Pisces", dates: "February 19 - March 20" },
+    { sign: "Aries", dates: "March 21 - April 19" },
+    { sign: "Taurus", dates: "April 20 - May 20" },
+    { sign: "Gemini", dates: "May 21 - June 20" },
+    { sign: "Cancer", dates: "June 21 - July 22" },
+    { sign: "Leo", dates: "July 23 - August 22" },
+    { sign: "Virgo", dates: "August 23 - September 22" },
+    { sign: "Libra", dates: "September 23 - October 22" },
+    { sign: "Scorpio", dates: "October 23 - November 21" },
+    { sign: "Sagittarius", dates: "November 22 - December 21" },
+    { sign: "Capricorn", dates: "December 22 - January 19" },
+  ];
+  // categories
+  const categories = [
+    { name: "name 1" },
+    { name: "name 2" },
+    { name: "name 3" },
+  ];
   return (
     <div>
       {about ? (
@@ -54,11 +88,22 @@ function Profilebottom({ about }) {
           </p>
         </div>
       ) : (
-        <div>
+        <div className="w-full  mb-[100px]">
           <form className="w-full">
+            {/* avatar */}
+            <div className="py-[20px] border-b-2 dark:border-gray-700 border-gray-300 sm:shadow-b-2xl flex lg:flex-row flex-col items-start  gap-[10px]    w-full">
+              {" "}
+              <img
+                src="/avatar.webp"
+                alt="avatar"
+                className="w-[150px] h-[150px] rounded-[20px] object-cover border-[5px] border-gray-400"
+              />
+              {/* follos  */}
+            </div>
+
             {/* name/ email section  */}
-            <section className="flex items-center gap-[10px]">
-              <div className=" flex flex-1 flex-col gap-[5px] my-5 ">
+            <section className="flex  sm:flex-row flex-col items-center gap-[10px] ">
+              <div className=" flex flex-1 flex-col gap-[5px] my-5  w-full">
                 <p className=" dark:text-gray-500 text-black">Name:</p>
                 <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                   <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
@@ -72,7 +117,7 @@ function Profilebottom({ about }) {
                   />
                 </div>
               </div>
-              <div className=" flex flex-1  flex-col gap-[5px] my-5 ">
+              <div className=" flex flex-1  flex-col gap-[5px] my-5   w-full">
                 <p className=" dark:text-gray-500 text-black">Email:</p>
                 <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                   <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
@@ -101,27 +146,59 @@ function Profilebottom({ about }) {
                 />
               </div>
             </div>
-            <div className=" flex flex-col gap-[5px] my-5 ">
-              <p className=" dark:text-gray-500 text-black">Category:</p>
-              <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
-                <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                  <EmailIcon fontSize="" />
+            {/* category  */}
+            <section className=" flex flex-1 flex-col gap-[5px] my-5  w-full relative">
+              <p className=" dark:text-gray-500 text-black ">Category</p>
+              <div
+                className="flex items-center justify-between gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700 z-50"
+                type="button">
+                <p className="flex items-center gap-2 text-gray-500 ">
+                  <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
+                    <ControlPointDuplicateIcon fontSize="" />
+                  </span>{" "}
+                  {formData.category}
+                </p>
+                <span
+                  className=" dark:text-gray-500 text-black cursor-pointer"
+                  onClick={() => setCategory(!category)}>
+                  {" "}
+                  {category ? (
+                    <KeyboardArrowUpIcon fontSize="medium" />
+                  ) : (
+                    <KeyboardArrowDownIcon fontSize="medium" />
+                  )}
                 </span>
-                <input
-                  className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
-                  type="text"
-                  name="email"
-                  placeholder="Enter your email"
-                />
+                {category && (
+                  <div
+                    className=" absolute  -left-[1px] -right-[1px] top-[70px]  bg-[#FFFFFF] dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full  dark:text-gray-500  text-gray-700 text-[12px] font-[500]  rounded-b-[10px]  p-3  h-[170px] overflow-scroll"
+                    onClick={() => setCategory(!category)}>
+                    {categories.map((category) => (
+                      <button
+                        key={category.name}
+                        value={category.name}
+                        type="button"
+                        className="  flex gap-[12px] py-[14px] px-[18px] hover:bg-blue-600/20 hover:text-black dark:hover:text-white cursor-pointer w-full rounded-[10px]"
+                        onClick={(e) =>
+                          setFormData({ ...formData, category: e.target.value })
+                        }>
+                        <span>
+                          <AccessibilityIcon />
+                        </span>
+                        {category.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            </section>
+
             {/* country/ Address section  */}
-            <section className="flex items-center gap-[10px]">
-              <div className=" flex flex-col gap-[5px] my-5 flex-1">
+            <section className="flex flex-col  sm:flex-row items-center gap-[10px]">
+              <div className=" flex flex-col  gap-[5px] my-5 flex-1  w-full">
                 <p className=" dark:text-gray-500 text-black">Country:</p>
                 <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                   <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                    <AlternateEmailIcon fontSize="" />
+                    <PublicIcon fontSize="" />
                   </span>
                   <input
                     className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
@@ -131,11 +208,11 @@ function Profilebottom({ about }) {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col gap-[5px] my-5 flex-1">
+              <div className=" flex flex-col gap-[5px] my-5 flex-1  w-full">
                 <p className=" dark:text-gray-500 text-black">Address:</p>
                 <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                   <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                    <EmailIcon fontSize="" />
+                    <HomeIcon fontSize="" />
                   </span>
                   <input
                     className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
@@ -150,7 +227,7 @@ function Profilebottom({ about }) {
               <p className=" dark:text-gray-500 text-black">Phone:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                 <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                  <AlternateEmailIcon fontSize="" />
+                  <LocalPhoneIcon fontSize="" />
                 </span>
                 <input
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
@@ -161,35 +238,113 @@ function Profilebottom({ about }) {
               </div>
             </div>
             {/* sign/ gender section  */}
-            <section className="flex items-center gap-[10px]">
-              <div className=" flex flex-1 flex-col gap-[5px] my-5 ">
-                <p className=" dark:text-gray-500 text-black">Sign:</p>
-                <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
-                  <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                    <EmailIcon fontSize="" />
+            <section className="flex  sm:flex-row flex-col items-center gap-[10px]">
+              {/* Sign  */}
+              <section className=" flex flex-1 flex-col gap-[5px] my-5  w-full relative">
+                <p className=" dark:text-gray-500 text-black">Select sign</p>
+                <div
+                  className="flex items-center justify-between gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700 z-50"
+                  type="button">
+                  <p className="flex items-center gap-2 text-gray-500 ">
+                    <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
+                      <AccessibilityIcon fontSize="" />
+                    </span>{" "}
+                    {formData.sign}
+                  </p>
+                  <span
+                    className=" dark:text-gray-500 text-black cursor-pointer"
+                    onClick={() => setSign(!sign)}>
+                    {" "}
+                    {sign ? (
+                      <KeyboardArrowUpIcon fontSize="medium" />
+                    ) : (
+                      <KeyboardArrowDownIcon fontSize="medium" />
+                    )}
                   </span>
-                  <input
-                    className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
-                    type="text"
-                    name="email"
-                    placeholder="Enter your email"
-                  />
+                  {sign && (
+                    <div
+                      className=" absolute  -left-[1px] -right-[1px] top-[70px]  bg-[#FFFFFF] dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full  dark:text-gray-500  text-gray-700 text-[12px] font-[500]  rounded-b-[10px]  p-3  h-[170px] overflow-scroll"
+                      onClick={() => setSign(!sign)}>
+                      {zodiacSigns.map((zsign) => (
+                        <button
+                          key={zsign}
+                          value={zsign.sign}
+                          type="button"
+                          className="  flex gap-[12px] py-[14px] px-[18px] hover:bg-blue-600/20 hover:text-black dark:hover:text-white cursor-pointer w-full rounded-[10px]"
+                          onClick={(e) =>
+                            setFormData({ ...formData, sign: e.target.value })
+                          }>
+                          {`${zsign.sign} - ${zsign.dates}`}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className=" flex flex-1 flex-col gap-[5px] my-5 ">
-                <p className=" dark:text-gray-500 text-black">Gender:</p>
-                <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
-                  <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
-                    <EmailIcon fontSize="" />
+              </section>
+              {/* Gender  */}
+              <section className=" flex flex-1 flex-col gap-[5px] my-5  w-full relative">
+                <p className=" dark:text-gray-500 text-black">Select Gender</p>
+                <div
+                  className="flex items-center justify-between gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700"
+                  type="button">
+                  <p className="flex items-center gap-2 text-gray-500 ">
+                    <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
+                      <WcIcon fontSize="" />
+                    </span>{" "}
+                    {formData.gender}
+                  </p>
+
+                  <span
+                    className=" dark:text-gray-500 text-black cursor-pointer"
+                    onClick={() => setGender(!gender)}>
+                    {" "}
+                    {gender ? (
+                      <KeyboardArrowUpIcon fontSize="medium" />
+                    ) : (
+                      <KeyboardArrowDownIcon fontSize="medium" />
+                    )}
                   </span>
-                  <input
-                    className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
-                    type="text"
-                    name="email"
-                    placeholder="Enter your email"
-                  />
+                  {gender && (
+                    <div
+                      className=" absolute  -left-[1px] -right-[1px] top-[70px]  bg-[#FFFFFF] dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full  dark:text-gray-500  text-gray-700 text-[12px] font-[500]  rounded-b-[10px] overflow-hidden p-3 "
+                      onClick={() => setGender(!gender)}>
+                      <button
+                        value="
+                      Male
+                      "
+                        type="button"
+                        className="  flex gap-[12px] py-[14px] px-[18px] hover:bg-blue-600/20 hover:text-black dark:hover:text-white cursor-pointer w-full rounded-[10px]"
+                        onClick={(e) =>
+                          setFormData({ ...formData, gender: e.target.value })
+                        }>
+                        <span></span> Male
+                      </button>
+                      <button
+                        value="
+                      Female
+                      "
+                        type="button"
+                        className="  flex gap-[12px] py-[14px] px-[18px] hover:bg-blue-600/20 hover:text-black dark:hover:text-white cursor-pointer w-full rounded-[10px]"
+                        onClick={(e) =>
+                          setFormData({ ...formData, gender: e.target.value })
+                        }>
+                        <span></span> Female
+                      </button>
+                      <button
+                        value="
+                      Other
+                      "
+                        type="button"
+                        className="  flex gap-[12px] py-[14px] px-[18px] hover:bg-blue-600/20 hover:text-black dark:hover:text-white cursor-pointer w-full rounded-[10px]"
+                        onClick={(e) =>
+                          setFormData({ ...formData, gender: e.target.value })
+                        }>
+                        <span></span> Other
+                      </button>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </section>
             </section>
             <div className="  flex items-center gap-[10px] ">
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
