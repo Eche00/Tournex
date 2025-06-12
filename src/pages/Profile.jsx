@@ -28,18 +28,34 @@ function Profile() {
   return (
     <div className=" w-full sm:h-[100vh] h-full overflow-scroll sm:pb-0 pb-[100px]">
       {/* container  */}
-      <main className="  flex lg:flex-row flex-col gap-[20px]  w-full sm:p-[20px]  ">
+      <main className="  flex xl:flex-row flex-col gap-[20px]  w-full sm:p-[20px]  ">
         {/* subcontainer  */}
-        <section className=" flex flex-col items-center  justify-center gap-[20px]  dark:sm:border-2 dark:border-gray-700  sm:shadow-2xl   sm:rounded-2xl sm:p-10 p-5 lg:w-[30%] h-fit">
+        <section className=" flex flex-col items-center  justify-center gap-[20px]  dark:sm:border-2 dark:border-gray-700  sm:shadow-2xl   sm:rounded-2xl sm:p-10 p-5 xl:w-fit w-full h-fit">
           {/* avatar */}
-          <div className="py-[20px] border-b-2 dark:border-gray-700 border-gray-300 sm:shadow-b-2xl flex flex-col sm:items-start  items-center justify-center    w-full">
+          <div className="py-[20px] border-b-2 dark:border-gray-700 border-gray-300 sm:shadow-b-2xl flex lg:flex-row flex-col sm:items-start  items-center gap-[10px] justify-center    w-full">
             {" "}
             <img
               src="/avatar.webp"
               alt="avatar"
               className="w-[150px] h-[150px] rounded-[20px] object-cover border-[5px] border-gray-400"
             />
+            {/* follos  */}
+            <div className="flex flex-row  items-baseline justify-between w-full">
+              <p className=" flex flex-col items-center text-gray-400   px-[10px] py-[8px] rounded-[10px] text-[16px] font-[400]">
+                <span className=" font-extrabold text-gray-700 dark:text-gray-200 text-sm">
+                  100
+                </span>
+                Following
+              </p>
+              <p className=" flex flex-col items-center text-gray-400   px-[10px] py-[8px] rounded-[10px] text-[16px] font-[400]">
+                <span className=" font-extrabold text-gray-700 dark:text-gray-200 text-sm">
+                  100
+                </span>
+                Followers
+              </p>
+            </div>
           </div>
+
           {/* user info  */}
           <div className="sm:hidden flex sm:flex-row  items-baseline justify-between w-full">
             <h1 className=" text-start dark:text-white text-black font-bold font-serif  text-[20px]">
