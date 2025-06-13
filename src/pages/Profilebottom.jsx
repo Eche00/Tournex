@@ -142,7 +142,7 @@ function Profilebottom({ about }) {
                   type="text"
                   name="name"
                   rows="5"
-                  placeholder="Enter your name"
+                  placeholder="Tell us about you"
                 />
               </div>
             </div>
@@ -204,7 +204,7 @@ function Profilebottom({ about }) {
                     className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
                     type="text"
                     name="name"
-                    placeholder="Enter your name"
+                    placeholder="Enter your country"
                   />
                 </div>
               </div>
@@ -231,9 +231,9 @@ function Profilebottom({ about }) {
                 </span>
                 <input
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
-                  type="text"
+                  type="phone"
                   name="name"
-                  placeholder="Enter your name"
+                  placeholder="Enter your mobile no"
                 />
               </div>
             </div>
