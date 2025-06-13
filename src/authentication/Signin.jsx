@@ -35,7 +35,7 @@ function Signin() {
 
         {/* subcontainer  */}
         <div className=" w-[90%] mx-auto md:w-[60%]">
-          <h1 className=" text-start dark:text-white text-black font-bold font-serif my-[30px]  text-[20px]">
+          <h1 className=" text-start dark:text-white text-black font-bold  my-[30px]  text-[20px]">
             Login to your account
           </h1>
           {/* form container  */}
