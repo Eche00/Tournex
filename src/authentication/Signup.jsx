@@ -8,9 +8,58 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function Signup() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    following: 0,
+    followers: 0,
+    gamecategory: "Call Of Duty",
+    country: "",
+    bio: "Tell us more about you...",
+    phone: "",
+    address: "",
+    sign: "",
+    gender: "",
+    // createdAt: serverTimestamp(),
+  });
   const [loading, setLoading] = useState(false);
   // password visibility
   const [visible, setVisible] = useState(false);
+  // error states
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  // handling change function
+  const handleChange = (e) => {
+    e.preventDefault();
+    // error reset
+    setEmailError(false);
+    setUsernameError(false);
+    setPasswordError(false);
+
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // handle submit
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // error handling
+    if (formData.username.length < 5) {
+      setUsernameError(true);
+      return;
+    } else if (!formData.email.includes("@")) {
+      setEmailError(true);
+      return;
+    } else if (formData.password.length < 8) {
+      setPasswordError(true);
+      return;
+    }
+
+    console.log(formData);
+  };
 
   return (
     <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] bg-white dark:bg-[#1F1F1F] overflow-hidden overscroll-none ">
@@ -31,7 +80,7 @@ function Signup() {
             Create Account
           </h1>
           {/* form container  */}
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Name:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
@@ -41,10 +90,17 @@ function Signup() {
                 <input
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
                   type="text"
-                  name="name"
+                  name="username"
+                  onChange={handleChange}
+                  value={formData.username}
                   placeholder="Enter your name"
                 />
               </div>
+              {usernameError && (
+                <p className=" text-red-500 ">
+                  Username must be at least 5 characters
+                </p>
+              )}
             </div>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Email:</p>
@@ -56,9 +112,14 @@ function Signup() {
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
                   type="text"
                   name="email"
+                  onChange={handleChange}
+                  value={formData.email}
                   placeholder="Enter your email"
                 />
               </div>
+              {emailError && (
+                <p className=" text-red-500 ">email missing '@'</p>
+              )}
             </div>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Password:</p>
@@ -77,10 +138,16 @@ function Signup() {
                   type={visible ? "text" : "password"}
                   name="password"
                   placeholder="Create a password"
-                  minLength={8}
+                  onChange={handleChange}
+                  value={formData.password}
                 />
               </div>
-              <p className=" text-gray-500 ">Must be at least 8 characters</p>
+              <p
+                className={
+                  passwordError ? " text-red-500 " : " text-gray-500 "
+                }>
+                Must be at least 8 characters
+              </p>
             </div>
             <div className="  flex items-center gap-[10px] ">
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
@@ -91,7 +158,9 @@ function Signup() {
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
             </div>
             <div className=" w-full flex items-center justify-center flex-col">
-              <button className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer">
+              <button
+                className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer"
+                type="submit">
                 {loading ? (
                   <div role="status">
                     <svg
