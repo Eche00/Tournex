@@ -6,7 +6,32 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import EmailIcon from "@mui/icons-material/Email";
 
 function ForgotPassword() {
+  const [formData, setFormData] = useState({
+    email: "",
+  });
   const [loading, setLoading] = useState(false);
+  // error states
+  const [emailError, setEmailError] = useState(false);
+  // handling change function
+  const handleChange = (e) => {
+    e.preventDefault();
+    // error reset
+    setEmailError(false);
+
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // handle submit
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // error handling
+    if (!formData.email.includes("@")) {
+      setEmailError(true);
+      return;
+    }
+    console.log(formData);
+  };
 
   return (
     <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] bg-white dark:bg-[#1F1F1F] overflow-hidden overscroll-none ">
@@ -27,7 +52,7 @@ function ForgotPassword() {
             Reset Password
           </h1>
           {/* form container  */}
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Email:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
@@ -38,9 +63,13 @@ function ForgotPassword() {
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
                   type="text"
                   name="email"
+                  onChange={handleChange}
                   placeholder="Enter your email"
                 />
               </div>
+              {emailError && (
+                <p className=" text-red-500 ">email missing '@'</p>
+              )}
             </div>
 
             <div className="  flex items-center gap-[10px] ">
@@ -52,7 +81,9 @@ function ForgotPassword() {
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
             </div>
             <div className=" w-full flex items-center justify-center flex-col">
-              <button className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer">
+              <button
+                className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer"
+                type="submit">
                 {loading ? (
                   <div role="status">
                     <svg
