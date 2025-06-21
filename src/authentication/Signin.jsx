@@ -9,11 +9,42 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function Signin() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   // password visibility
   const [visible, setVisible] = useState(false);
-  const { theme } = useSelector((state) => state.theme);
-  const dispatch = useDispatch();
+  // error states
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  // handling change function
+  const handleChange = (e) => {
+    e.preventDefault();
+    // error reset
+    setEmailError(false);
+    setPasswordError(false);
+
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // handle submit
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // error handling
+    if (!formData.email.includes("@")) {
+      setEmailError(true);
+      return;
+    } else if (formData.password.length <= 0) {
+      setPasswordError(true);
+      return;
+    }
+
+    console.log(formData);
+  };
 
   return (
     <div className=" sm:flex sm:items-center sm:justify-center h-[100vh] bg-white dark:bg-[#1F1F1F] overflow-hidden overscroll-none ">
@@ -27,11 +58,6 @@ function Signin() {
             className="w-[50px] h-[50px] object-cover border-gray-300 border-2 rounded-full "
           />
         </Link>
-        <button
-          onClick={() => dispatch(toggleTheme())}
-          className="absolute top-2 right-2  z-50 dark:text-white text-[#1F1F1F] rounded-full p-2 flex items-center justify-center">
-          <CloseIcon fontSize="medium" />
-        </button>
 
         {/* subcontainer  */}
         <div className=" w-[90%] mx-auto md:w-[60%]">
@@ -39,7 +65,7 @@ function Signin() {
             Login to your account
           </h1>
           {/* form container  */}
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Email:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
@@ -50,9 +76,13 @@ function Signin() {
                   className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
                   type="text"
                   name="email"
+                  onChange={handleChange}
                   placeholder="Enter your email"
                 />
               </div>
+              {emailError && (
+                <p className=" text-red-500 ">email missing '@'</p>
+              )}
             </div>
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Password:</p>
@@ -71,9 +101,12 @@ function Signin() {
                   type={visible ? "text" : "password"}
                   name="password"
                   placeholder="Enter your password"
-                  minLength={8}
+                  onChange={handleChange}
                 />
               </div>
+              {passwordError && (
+                <p className=" text-red-500 ">Type in Your Password</p>
+              )}
             </div>
             <div className="  flex items-center gap-[10px] ">
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
@@ -84,7 +117,9 @@ function Signin() {
               <span className="flex-1 bg-gray-300 dark:bg-gray-700 h-[0.2px] "></span>
             </div>
             <div className=" w-full flex items-center justify-center flex-col">
-              <button className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer">
+              <button
+                className="bg-blue-600 w-full py-[10px] text-[12px] font-bold text-white rounded-[10px] my-[10px] cursor-pointer"
+                type="submit">
                 {loading ? (
                   <div role="status">
                     <svg
