@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import EmailIcon from "@mui/icons-material/Email";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { handleRegistration } from "../lib/regLogic";
+import { serverTimestamp } from "firebase/firestore";
+import { auth } from "../lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -21,20 +25,33 @@ function Signup() {
     address: "",
     sign: "",
     gender: "",
-    // createdAt: serverTimestamp(),
+    createdAt: serverTimestamp(),
   });
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   // password visibility
   const [visible, setVisible] = useState(false);
   // error states
+  const [error, setError] = useState("");
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
 
   // handling change function
   const handleChange = (e) => {
     e.preventDefault();
     // error reset
+    setLoading(false);
+    setError("");
     setEmailError(false);
     setUsernameError(false);
     setPasswordError(false);
@@ -44,8 +61,11 @@ function Signup() {
 
   // handle submit
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+
     // error handling
     if (formData.username.length < 5) {
       setUsernameError(true);
@@ -57,8 +77,15 @@ function Signup() {
       setPasswordError(true);
       return;
     }
-
-    console.log(formData);
+    //  handling registeration
+    try {
+      await handleRegistration(formData);
+      navigate("/signin");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,6 +109,7 @@ function Signup() {
           {/* form container  */}
           <form className="w-full" onSubmit={handleSubmit}>
             <div className=" flex flex-col gap-[5px] my-5 ">
+              {error && <p className=" text-red-500 ">{error}</p>}
               <p className=" dark:text-gray-500 text-black">Name:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
                 <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
