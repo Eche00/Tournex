@@ -12,11 +12,14 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import WcIcon from "@mui/icons-material/Wc";
+import { Delete } from "@mui/icons-material";
 function Profilebottom({ about }) {
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState(false);
   const [gender, setGender] = useState(false);
   const [sign, setSign] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
+  const [deleteText, setDeleteText] = useState("");
   const [formData, setFormData] = useState({
     sign: "Select sign",
     gender: "Select gender",
@@ -44,6 +47,11 @@ function Profilebottom({ about }) {
     { name: "name 2" },
     { name: "name 3" },
   ];
+
+  // deleting my account
+  const handleDeleteUser = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
       {about ? (
@@ -86,6 +94,45 @@ function Profilebottom({ about }) {
               Male
             </span>
           </p>
+          <p
+            className=" flex items-center justify-between text-red-600  bg-red-500/20 px-[12px] py-[14px] rounded-[10px] text-[16px] font-extrabold mt-16 cursor-pointer "
+            onClick={() => setDeleteUser(!deleteUser)}>
+            Delete My Account
+            <Delete fontSize="small" />
+          </p>
+          {deleteUser && (
+            <div className="w-full flex flex-col gap-[5px] my-5">
+              <p className=" flex items-baseline text-gray-500 font-[600]  text-[16px] gap-[3px]">
+                To Confirm this Action Type In{" "}
+                <span className="dark:text-white text-black font-bold  text-[14px]">
+                  "DELETE MY ACCOUNT"
+                </span>{" "}
+                and click
+                <span className="dark:text-white text-black font-bold  text-[14px]">
+                  {" "}
+                  DELETE
+                </span>{" "}
+                .
+              </p>{" "}
+              <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700 my-3">
+                <span className=" dark:text-gray-500 text-black border-r border-black  dark:border-gray-500 pr-2">
+                  <Delete fontSize="" />
+                </span>
+                <input
+                  className="  outline-none dark:text-white  text-black flex-1 placeholder:text-gray-500 "
+                  type="text"
+                  onChange={(e) => setDeleteText(e.target.value)}
+                />
+              </div>
+              <button
+                // onClick={handleLogOut}
+                disabled={deleteText != "DELETE MY ACCOUNT"}
+                onClick={() => handleDeleteUser}
+                className="flex-1  bg-red-500 cursor-pointer w-full py-[8px] rounded-[10px] transition-all duration-300 flex items-center justify-center gap-[10px] disabled:bg-red-500/40 disabled:cursor-not-allowed">
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="w-full  mb-[100px]">

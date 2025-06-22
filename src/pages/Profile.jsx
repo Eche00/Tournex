@@ -1,12 +1,14 @@
-import { Settings, ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
+import { Logout } from "@mui/icons-material";
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme, toggleTheme } from "../redux/theme/themeSlice";
+import { setTheme } from "../redux/theme/themeSlice";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LocationOn from "@mui/icons-material/LocationOn";
 import Profilebottom from "./Profilebottom";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 function Profile() {
   const [user, setUser] = useState(false);
@@ -14,6 +16,7 @@ function Profile() {
   const [setting, setSetting] = useState(false);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // handle setting toggle
   const settingToggle = (e) => {
@@ -25,6 +28,18 @@ function Profile() {
       setSetting(true);
     }
   };
+
+  // logout func
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.log(error.code);
+    }
+  };
+
   return (
     <div className=" w-full sm:h-[100vh] h-full overflow-scroll sm:pb-0 pb-[100px]">
       {/* container  */}
@@ -104,6 +119,17 @@ function Profile() {
               <DarkModeIcon />
             </button>
           </div>
+          {/* log out  */}
+          {user && (
+            <div className="w-full">
+              {" "}
+              <button
+                onClick={handleLogOut}
+                className="flex-1  bg-red-500 cursor-pointer sm:w-[120px] w-full py-[8px] rounded-[10px] transition-all duration-300 flex items-center justify-center gap-[10px]">
+                Logout <Logout fontSize="" />
+              </button>
+            </div>
+          )}
         </section>
 
         {/* subcontainer 2  */}
