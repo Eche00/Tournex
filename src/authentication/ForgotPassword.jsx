@@ -69,10 +69,10 @@ function ForgotPassword() {
             className={`  dark:text-white text-black font-bold my-[30px]  text-[20px] ${
               !success ? "text-center" : "text-start"
             }`}>
-            {!success ? "Email Sent" : "Reset Password"}
+            {success ? "Email Sent" : "Reset Password"}
           </h1>
           {/* form container  */}
-          {!success ? (
+          {success ? (
             <div className=" flex flex-col gap-[10px] items-center justify-center w-full">
               <span className=" border-2 border-blue-600 p-3 flex items-center justify-center rounded-full w-fit">
                 {" "}
