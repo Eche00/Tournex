@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
-import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../redux/theme/themeSlice";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import EmailIcon from "@mui/icons-material/Email";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 function Signin() {
   const [formData, setFormData] = useState({
@@ -17,13 +16,46 @@ function Signin() {
   // password visibility
   const [visible, setVisible] = useState(false);
   // error states
+  const [error, setError] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const navigate = useNavigate();
+
+  // user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
+
+  // error switching
+  const handleErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "Invalid email address format. Please check your email.";
+      case "auth/user-disabled":
+        return "This account has been disabled. Please contact support.";
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+        return "Invalid email or password. Please try again.";
+      case "auth/too-many-requests":
+        return "Too many login attempts. Please try again later.";
+      case "auth/network-request-failed":
+        return "Network error. Please check your internet connection.";
+      default:
+        return "An unexpected error occurred. Please try again.";
+    }
+  };
 
   // handling change function
   const handleChange = (e) => {
     e.preventDefault();
     // error reset
+    setError("");
     setEmailError(false);
     setPasswordError(false);
 
@@ -32,9 +64,11 @@ function Signin() {
 
   // handle submit
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     // error handling
+    setError("");
     if (!formData.email.includes("@")) {
       setEmailError(true);
       return;
@@ -43,7 +77,15 @@ function Signin() {
       return;
     }
 
-    console.log(formData);
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      navigate("/");
+    } catch (error) {
+    } finally {
+      const customErrMessage = handleErrorMessage(error.code);
+      setError(customErrMessage);
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,6 +108,7 @@ function Signin() {
           </h1>
           {/* form container  */}
           <form className="w-full" onSubmit={handleSubmit}>
+            {error && <p className=" text-red-500 ">{error}</p>}
             <div className=" flex flex-col gap-[5px] my-5 ">
               <p className=" dark:text-gray-500 text-black">Email:</p>
               <div className="flex items-center gap-2 bg-transparent dark:bg-black border-1 border-gray-300 dark:border-gray-700  w-full px-3 py-4 rounded-[10px]  dark:text-white  text-gray-700">
