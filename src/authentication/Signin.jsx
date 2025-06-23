@@ -66,7 +66,7 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     // error handling
     setError("");
     if (!formData.email.includes("@")) {

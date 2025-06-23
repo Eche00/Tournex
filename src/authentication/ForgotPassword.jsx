@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import EmailIcon from "@mui/icons-material/Email";
 import { auth } from "../lib/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 function ForgotPassword() {
   const [formData, setFormData] = useState({
@@ -28,6 +29,8 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     // error handling
     if (!formData.email.includes("@")) {
       setEmailError(true);
