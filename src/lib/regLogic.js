@@ -30,22 +30,20 @@ export const handleRegistration = async (formData) => {
     const user = userCresidentials.user;
 
     // Store additional user details in Firestore
-    await setDoc(
-      doc(db, "users", user.uid, {
-        username,
-        email,
-        following,
-        followers,
-        gamecategory,
-        country,
-        bio,
-        phone,
-        address,
-        sign,
-        gender,
-        createdAt,
-      })
-    );
+    await setDoc(doc(db, "usersTournex", user.uid), {
+      username,
+      email,
+      following,
+      followers,
+      gamecategory,
+      country,
+      bio,
+      phone,
+      address,
+      sign,
+      gender,
+      createdAt,
+    });
     console.log("User registered successfully:");
   } catch (error) {
     console.error("Registeration  failed:", error);
